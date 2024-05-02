@@ -59,8 +59,47 @@ pipeline {
             }
         }
         
-        // Add other stages as needed
+        stage('Deploy to Staging') {
+            steps {
+                echo 'Deploying the application to staging server (e.g., AWS EC2 instance)'
+            }
+            post {
+                success {
+                    sendEmailNotification('Deployment to Staging Successful', 'Application deployed to staging server successfully.')
+                }
+                failure {
+                    sendEmailNotification('Deployment to Staging Failed', 'Failed to deploy application to staging server. Please check the logs.')
+                }
+            }
+        }
         
+        stage('Integration Tests on Staging') {
+            steps {
+                echo 'Running integration tests on staging environment'
+            }
+            post {
+                success {
+                    sendEmailNotification('Integration Tests on Staging Successful', 'Integration tests on staging environment completed successfully.', 'target/surefire-reports/*.txt')
+                }
+                failure {
+                    sendEmailNotification('Integration Tests on Staging Failed', 'Integration tests on staging environment failed. Please check the logs.', 'target/surefire-reports/*.txt')
+                }
+            }
+        }
+        
+        stage('Deploy to Production') {
+            steps {
+                echo 'Deploying the application to production server (e.g., AWS EC2 instance)'
+            }
+            post {
+                success {
+                    sendEmailNotification('Deployment to Production Successful', 'Application deployed to production server successfully.')
+                }
+                failure {
+                    sendEmailNotification('Deployment to Production Failed', 'Failed to deploy application to production server. Please check the logs.')
+                }
+            }
+        }
     }
     
     post {
