@@ -30,6 +30,6 @@ def sendEmailNotification(subject, body, attachmentsPattern = '') {
     emailext (
         subject: subject,
         body: body,
-        to: "your-email@example.com"
+        to: "ravella.nani123@gmail.com"
     )
 }
