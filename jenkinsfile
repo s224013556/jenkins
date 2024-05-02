@@ -4,100 +4,14 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building code using Maven'
-            }
-            post {
-                success {
-                    sendEmailNotification('Build Successful', 'Build completed successfully.')
-                }
-                failure {
-                    sendEmailNotification('Build Failed', 'Build failed. Please check the logs.')
-                }
+                echo 'Building code...'
             }
         }
         
-        stage('Unit and Integration Tests') {
+        stage('Send Email Notification') {
             steps {
-                echo 'Running unit tests using JUnit'
-                echo 'Running integration tests using Selenium'
-            }
-            post {
-                success {
-                    sendEmailNotification('Unit and Integration Tests Successful', 'Unit and integration tests completed successfully.', 'target/surefire-reports/*.txt')
-                }
-                failure {
-                    sendEmailNotification('Unit and Integration Tests Failed', 'Unit and integration tests failed. Please check the logs.', 'target/surefire-reports/*.txt')
-                }
-            }
-        }
-        
-        stage('Code Analysis') {
-            steps {
-                echo 'Analyzing code using SonarQube'
-            }
-            post {
-                success {
-                    sendEmailNotification('Code Analysis Successful', 'Code analysis completed successfully.')
-                }
-                failure {
-                    sendEmailNotification('Code Analysis Failed', 'Code analysis failed. Please check the logs.')
-                }
-            }
-        }
-        
-        stage('Security Scan') {
-            steps {
-                echo 'Performing security scan using OWASP ZAP'
-            }
-            post {
-                success {
-                    sendEmailNotification('Security Scan Successful', 'Security scan completed successfully.', 'zap/*.html')
-                }
-                failure {
-                    sendEmailNotification('Security Scan Failed', 'Security scan failed. Please check the logs.', 'zap/*.html')
-                }
-            }
-        }
-        
-        stage('Deploy to Staging') {
-            steps {
-                echo 'Deploying the application to staging server (e.g., AWS EC2 instance)'
-            }
-            post {
-                success {
-                    sendEmailNotification('Deployment to Staging Successful', 'Application deployed to staging server successfully.')
-                }
-                failure {
-                    sendEmailNotification('Deployment to Staging Failed', 'Failed to deploy application to staging server. Please check the logs.')
-                }
-            }
-        }
-        
-        stage('Integration Tests on Staging') {
-            steps {
-                echo 'Running integration tests on staging environment'
-            }
-            post {
-                success {
-                    sendEmailNotification('Integration Tests on Staging Successful', 'Integration tests on staging environment completed successfully.', 'target/surefire-reports/*.txt')
-                }
-                failure {
-                    sendEmailNotification('Integration Tests on Staging Failed', 'Integration tests on staging environment failed. Please check the logs.', 'target/surefire-reports/*.txt')
-                }
-            }
-        }
-        
-        stage('Deploy to Production') {
-            steps {
-                echo 'Deploying the application to production server (e.g., AWS EC2 instance)'
-            }
-            post {
-                success {
-                    sendEmailNotification('Deployment to Production Successful', 'Application deployed to production server successfully.')
-                }
-                failure {
-                    sendEmailNotification('Deployment to Production Failed', 'Failed to deploy application to production server. Please check the logs.')
-                }
+                echo 'Sending test email...'
+                sendEmailNotification('Test Email', 'This is a test email from Jenkins.')
             }
         }
     }
@@ -114,9 +28,8 @@ pipeline {
 
 def sendEmailNotification(subject, body, attachmentsPattern = '') {
     emailext (
-        subject: subject + ": ${currentBuild.fullDisplayName}",
+        subject: subject,
         body: body,
-        to: "ravella.nani123@gmail.com",
-        attachmentsPattern: attachmentsPattern
+        to: "your-email@example.com"
     )
 }
