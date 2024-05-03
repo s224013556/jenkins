@@ -16,7 +16,7 @@ pipeline {
             }
             post {
                 success {
-                    mail(
+                    emailext(
                         to: 'ravella.nani123@gmail.com',
                         subject: 'Success: Security Scan',
                         body: 'Security scan completed successfully without any issues.',
@@ -24,7 +24,7 @@ pipeline {
                     )
                 }
                 failure {
-                    mail(
+                    emailext(
                         to: 'ravella.nani123@gmail.com',
                         subject: 'Failure: Security Scan',
                         body: 'Security scan detected issues. Please check the Jenkins console output for more details.',
@@ -48,14 +48,14 @@ pipeline {
             }
             post {
                 success {
-                    mail(
+                    emailext(
                         to: 'ravella.nani123@gmail.com',
                         subject: 'Success: Security Scan',
                         body: 'Security scan completed successfully without any issues.'
                     )
                 }
                 failure {
-                    mail(
+                    emailext(
                         to: 'ravella.nani123@gmail.com',
                         subject: 'Failure: Security Scan',
                         body: 'Security scan detected issues. Please check the Jenkins console output for more details.'
