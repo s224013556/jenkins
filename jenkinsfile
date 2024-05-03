@@ -18,24 +18,26 @@ pipeline {
                 success {
                     echo 'Success: Sending email...'
                     emailext (
-                        to: 'ravella.nani123@gmail.com',
-                        subject: 'Success: Security Scan',
-                        body: 'Security scan completed successfully without any issues.',
-                        attachLog: true,
-                        retries: 3, // Increase the number of retries
-                        retryWaitTime: 30 
-                    )
+                    to: 'ravella.nani123@gmail.com',
+                    subject: 'Success: Security Scan',
+                    body: 'Security scan completed successfully without any issues.',
+                    attachLog: true,
+                    replyTo: 'jenkins@example.com', // Optional: Specify a reply-to address
+                    retries: 3, // Number of retries (optional)
+                    retryWaitTime: 30 // Wait time between retries in seconds (optional)
+                )
                 }
                 failure {
                     echo 'Failure: Sending email...'
                     emailext (
-                        to: 'ravella.nani123@gmail.com',
-                        subject: 'Failure: Security Scan',
-                        body: 'Security scan detected issues. Please check the Jenkins console output for more details.',
-                        attachLog: true,
-                        retries: 3, // Increase the number of retries
-                        retryWaitTime: 30 
-                    )
+                    to: 'ravella.nani123@gmail.com',
+                    subject: 'Failure: Security Scan',
+                    body: 'Security scan detected issues. Please check the Jenkins console output for more details.',
+                    attachLog: true,
+                    replyTo: 'jenkins@example.com', // Optional: Specify a reply-to address
+                    retries: 3, // Number of retries (optional)
+                    retryWaitTime: 30 // Wait time between retries in seconds (optional)
+                )
                 }
             }
         }
