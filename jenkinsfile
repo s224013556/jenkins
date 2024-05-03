@@ -21,7 +21,9 @@ pipeline {
                         to: 'ravella.nani123@gmail.com',
                         subject: 'Success: Security Scan',
                         body: 'Security scan completed successfully without any issues.',
-                        attachLog: true
+                        attachLog: true,
+                        retries: 3, // Increase the number of retries
+                        retryWaitTime: 30 
                     )
                 }
                 failure {
@@ -30,7 +32,9 @@ pipeline {
                         to: 'ravella.nani123@gmail.com',
                         subject: 'Failure: Security Scan',
                         body: 'Security scan detected issues. Please check the Jenkins console output for more details.',
-                        attachLog: true
+                        attachLog: true,
+                        retries: 3, // Increase the number of retries
+                        retryWaitTime: 30 
                     )
                 }
             }
