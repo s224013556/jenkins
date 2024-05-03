@@ -87,8 +87,16 @@ pipeline {
     post {
         always {
             echo 'General notification: The pipeline has completed execution.'
+            // Archive console output
+            archiveArtifacts artifacts: 'console.log'
+
+            // Send email with console output as attachment
+            emailext (
+                to: 'ravella.nani123@gmail.com',
+                subject: 'Pipeline Execution Report',
+                body: 'Please find the attached console output.',
+                attachmentsPattern: 'console.log'
+            )
         }
     }
 }
-
-
