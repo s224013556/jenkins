@@ -95,7 +95,7 @@ pipeline {
                 to: 'ravella.nani123@gmail.com',
                 subject: 'Pipeline Execution Report',
                 body: 'Please find the attached console output.',
-                attachmentsPattern: 'console.log'
+                attachmentsPattern: '**/console.log'
             )
         }
     }
