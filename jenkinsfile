@@ -15,7 +15,7 @@ pipeline {
         }
 
         failure{
-            emailext attachLog: true, body: 'Email sent out from Jenkins', subject: 'Test email - Failed', to: 'ravella.nani123@gmail.com'
+            emailext attachLog: true, body: 'Email sent out from Jenkins', subject: 'Test email - Failure', to: 'ravella.nani123@gmail.com'
         }
     }
 }
