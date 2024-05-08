@@ -87,15 +87,18 @@ pipeline {
     post {
         always {
             echo 'General notification: The pipeline has completed execution.'
-            // Archive console output
-            archiveArtifacts artifacts: '*/workspace/**/console.log', allowEmptyArchive: true
+
+            // Get the console log content
+            def consoleLogContent = readFile("${env.BUILD_URL}consoleText")
 
             // Send email with console output as attachment
             emailext (
                 to: 'ravella.nani123@gmail.com',
                 subject: 'Pipeline Execution Report',
                 body: 'Please find the attached console output.',
-                attachmentsPattern: '**/console.log'
+                attachments: [
+                    [$class: 'Artifact', file: "${env.BUILD_ID}/console.log", includeRemotePath: false]
+                ]
             )
         }
     }
