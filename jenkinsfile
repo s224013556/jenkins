@@ -89,16 +89,14 @@ pipeline {
             echo 'General notification: The pipeline has completed execution.'
 
             // Get the console log content
-            def consoleLogContent = readFile("${env.BUILD_URL}consoleText")
+            def consoleLogContent = currentBuild.rawBuild.getLog(10000) // Adjust the limit as needed
 
             // Send email with console output as attachment
             emailext (
                 to: 'ravella.nani123@gmail.com',
                 subject: 'Pipeline Execution Report',
                 body: 'Please find the attached console output.',
-                attachments: [
-                    [$class: 'Artifact', file: "${env.BUILD_ID}/console.log", includeRemotePath: false]
-                ]
+                attachLog: true
             )
         }
     }
