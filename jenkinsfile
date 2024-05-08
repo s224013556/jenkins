@@ -88,7 +88,7 @@ pipeline {
         always {
             echo 'General notification: The pipeline has completed execution.'
             // Archive console output
-            archiveArtifacts artifacts: '**/console.log', allowEmptyArchive: true
+            archiveArtifacts artifacts: '*/workspace/**/console.log', allowEmptyArchive: true
 
             // Send email with console output as attachment
             emailext (
