@@ -14,20 +14,12 @@ pipeline {
                 echo 'Stage 2: Unit and Integration Tests - Runs automated tests to verify the functionality of individual units of code and their interaction.'
                 echo 'Tool used: JUnit for unit testing and Selenium for integration testing.'
             }
-            post {
-                success {
-                    mail(
-                        to: 'ravella.nani123@gmail.com',
-                        subject: 'Success: Unit and Integration Tests',
-                        body: 'All unit and integration tests passed successfully.'
-                    )
+            post{
+                success{
+                    emailext attachLog: true, body: '\'Please find the attached console output.\'', subject: '\'Pipeline execution Report\'', to: 'ravella.nani123@gmail.com'
                 }
-                failure {
-                    mail(
-                        to: 'ravella.nani123@gmail.com',
-                        subject: 'Failure: Unit and Integration Tests',
-                        body: 'Some unit or integration tests failed. Please check the Jenkins console output for more details.'
-                    )
+                failure{
+                    emailext attachLog: true, body: '\'Please find the attached console output.\'', subject: '\'Pipeline execution Report\'', to: 'ravella.nani123@gmail.com'
                 }
             }
         }
@@ -84,19 +76,4 @@ pipeline {
         }
     }
 
-    post {
-        always {
-            echo 'General notification: The pipeline has completed execution.'
-            // Archive console output
-            archiveArtifacts artifacts: '**/console.log', allowEmptyArchive: true
-
-            // Send email with console output as attachment
-            emailext (
-                to: 'ravella.nani123@gmail.com',
-                subject: 'Pipeline Execution Report',
-                body: 'Please find the attached console output.',
-                attachmentsPattern: 'console.log'
-            )
-        }
-    }
 }
