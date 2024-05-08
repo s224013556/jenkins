@@ -16,10 +16,10 @@ pipeline {
             }
             post {
                 success {
-                    emailext attachLog: true, body: 'Please find the attached console output.', subject: 'Pipeline execution Report', to: 'ravella.nani123@gmail.com'
+                    emailext attachLog: true, body: 'Please find the attached console output.', subject: 'Pipeline Execution Report', to: 'ravella.nani123@gmail.com'
                 }
                 failure {
-                    emailext attachLog: true, body: 'Please find the attached console output.', subject: 'Pipeline execution Report', to: 'ravella.nani123@gmail.com'
+                    emailext attachLog: true, body: 'Please find the attached console output.', subject: 'Pipeline Execution Report', to: 'ravella.nani123@gmail.com'
                 }
             }
         }
@@ -37,19 +37,8 @@ pipeline {
                 echo 'Tool used: OWASP Dependency Check - identifies project dependencies and checks if there are any known, publicly disclosed vulnerabilities.'
             }
             post {
-                success {
-                    mail(
-                        to: 'ravella.nani123@gmail.com',
-                        subject: 'Success: Security Scan',
-                        body: 'Security scan completed successfully without any issues.'
-                    )
-                }
-                failure {
-                    mail(
-                        to: 'ravella.nani123@gmail.com',
-                        subject: 'Failure: Security Scan',
-                        body: 'Security scan detected issues. Please check the Jenkins console output for more details.'
-                    )
+                always {
+                    emailext attachLog: true, body: 'Please find the attached console output.', subject: 'Pipeline Execution Report', to: 'ravella.nani123@gmail.com'
                 }
             }
         }
