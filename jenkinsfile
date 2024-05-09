@@ -34,7 +34,7 @@ pipeline {
         stage('Security Scan') {
             steps {
                 echo 'Stage 4: Security Scan - Scans the code, dependencies, and configurations for known security vulnerabilities.'
-                echo 'Tool used: OWASP Dependency Check - identifies project dependencies and checks if there are any known, publicly disclosed vulnerabilities.'
+                echo 'Tool is used: OWASP Dependency Check - identifies project dependencies and checks if there are any known, publicly disclosed vulnerabilities.'
             }
             post {
                 always {
