@@ -38,7 +38,7 @@ pipeline {
             }
             post {
                 always {
-                    emailext attachLog: true, body: 'Please find the attached console output.', subject: 'Pipeline Execution Report', to: 'ravella.nani123@gmail.com'
+                    emailext attachLog: true, body: 'Security scan done, Please find the attached console output.', subject: 'Pipeline Execution Report', to: 'ravella.nani123@gmail.com'
                 }
             }
         }
