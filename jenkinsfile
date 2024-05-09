@@ -53,7 +53,7 @@ pipeline {
         stage('Integration Tests on Staging') {
             steps {
                 echo 'Stage 6: Integration Tests on Staging - Runs integration tests in the staging environment to validate the application against the production-like setup.'
-                echo 'Tool used: Postman (for API testing) or Selenium (for UI testing).'
+                echo 'Tool being used: Postman (for API testing) or Selenium (for UI testing).'
             }
         }
 
